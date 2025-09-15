@@ -1,0 +1,447 @@
+/* Dark mode detection */
+:root {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-gradient: linear-gradient(135deg, #064e3b, #7b1e1e);
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
+  --shadow-light: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-medium: 0 8px 25px rgba(0,0,0,0.15);
+  --btn-gradient: linear-gradient(135deg, #059669, #047857);
+  --btn-hover-gradient: linear-gradient(135deg, #991b1b, #7f1d1d);
+  --accent-green: #064e3b;
+  --accent-red: #7b1e1e;
+}
+
+.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --border-color: #334155;
+  --shadow-light: 0 4px 20px rgba(0,0,0,0.3);
+  --shadow-medium: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* General body styling */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.6;
+  transition: all 0.3s ease;
+  min-height: 100vh;
+}
+
+header, footer {
+  width: 100%;
+  background: var(--bg-gradient);
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+header::before, footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+header {
+  border-radius: 0 0 24px 24px;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+footer {
+  border-radius: 24px 24px 0 0;
+  margin-top: auto;
+  font-size: 0.9rem;
+}
+
+section {
+  margin: 1.5rem auto;
+  padding: 2rem;
+  max-width: 700px;
+  width: 90%;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--bg-gradient);
+  border-radius: 20px 20px 0 0;
+}
+
+section:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
+}
+
+section h2 {
+  margin-top: 0;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* Enhanced Buttons */
+button {
+  padding: 12px 24px;
+  margin: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 12px;
+  background: var(--btn-gradient);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:hover {
+  background: var(--btn-hover-gradient);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(153, 27, 27, 0.4);
+}
+
+button:active {
+  transform: translateY(0) scale(0.98);
+  transition: all 0.1s ease;
+}
+
+/* ---------- Part 1 Box ---------- */
+.box {
+  width: 100px;
+  height: 100px;
+  background: var(--accent-green);
+  margin: 20px auto;
+  border-radius: 16px;
+  animation: slideIn 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  box-shadow: 0 8px 20px rgba(6, 78, 59, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.box::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+  animation: boxShine 2s infinite;
+}
+
+@keyframes boxShine {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes slideIn {
+  from { 
+    transform: translateY(-100px) rotate(-10deg); 
+    opacity: 0; 
+    scale: 0.8;
+  }
+  to { 
+    transform: translateY(0) rotate(0deg); 
+    opacity: 1; 
+    scale: 1;
+  }
+}
+
+/* ---------- Part 2 Results ---------- */
+#result {
+  background: var(--bg-primary);
+  padding: 1rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+  font-weight: 500;
+  border: 2px solid var(--border-color);
+  transition: all 0.3s ease;
+  min-height: 1.5rem;
+}
+
+#result:not(:empty) {
+  border-color: var(--accent-green);
+  box-shadow: 0 0 20px rgba(6, 78, 59, 0.2);
+}
+
+/* ---------- Part 3 Enhanced Animations ---------- */
+/* 1. Animate box */
+.js-box {
+  width: 80px;
+  height: 80px;
+  margin: 20px auto;
+  background: var(--accent-red);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(123, 30, 30, 0.3);
+}
+
+.js-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(123, 30, 30, 0.4);
+}
+
+@keyframes bounce {
+  0%, 100% { 
+    transform: translateY(0) scale(1); 
+    box-shadow: 0 4px 15px rgba(123, 30, 30, 0.3);
+  }
+  50% { 
+    transform: translateY(-25px) scale(1.1); 
+    box-shadow: 0 15px 30px rgba(123, 30, 30, 0.5);
+  }
+}
+.bounce { 
+  animation: bounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite; 
+}
+
+/* 2. Enhanced Card flip */
+.card {
+  width: 140px;
+  height: 180px;
+  perspective: 1000px;
+  margin: 20px auto;
+  cursor: pointer;
+}
+
+.card-inner {
+  width: 100%; 
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .card-inner {
+  transform: rotateY(15deg);
+}
+
+.card.flip .card-inner { 
+  transform: rotateY(180deg); 
+}
+
+.card.flip:hover .card-inner {
+  transform: rotateY(165deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%; 
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.card-front { 
+  background: linear-gradient(135deg, #059669, #047857); 
+  color: white; 
+}
+
+.card-back { 
+  background: linear-gradient(135deg, #991b1b, #7f1d1d); 
+  color: white; 
+  transform: rotateY(180deg); 
+}
+
+/* 3. Enhanced Loader */
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--border-color);
+  border-top: 4px solid var(--accent-green);
+  border-radius: 50%;
+  margin: 20px auto;
+  display: none;
+  position: relative;
+}
+
+.loader::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top: 2px solid var(--accent-red);
+  animation: spinReverse 1.5s linear infinite;
+}
+
+.spin { 
+  animation: spin 1s linear infinite; 
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+/* 4. Enhanced Modal */
+.modal {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 2rem;
+  border-radius: 20px;
+  animation: modalSlide 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  border: 1px solid var(--border-color);
+  max-width: 90%;
+  position: relative;
+}
+
+.modal-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--bg-gradient);
+  border-radius: 20px 20px 0 0;
+}
+
+@keyframes modalSlide {
+  from { 
+    transform: translateY(-100px) scale(0.8); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateY(0) scale(1); 
+    opacity: 1; 
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  section {
+    margin: 1rem auto;
+    padding: 1.5rem;
+    width: 95%;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    margin: 6px;
+  }
+
+  .card {
+    width: 120px;
+    height: 160px;
+  }
+
+  header, footer {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+button:focus, .card:focus, .js-box:focus {
+  outline: 2px solid var(--accent-green);
+  outline-offset: 2px;
+}

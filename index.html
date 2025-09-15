@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phil's CSS3 & JavaScript Animations</title>
+  <link rel="stylesheet" href="Styles.css">
+</head>
+<body>
+  <header>
+    <h1>Phil's CSS3 & JavaScript Animations</h1>
+  </header>
+
+  <!-- Part 1: CSS Only -->
+  <section>
+    <h2>Part 1: Pure CSS Transitions & Animations</h2>
+    <button class="hover-btn">Hover Me</button>
+    <div class="box">CSS Box</div>
+  </section>
+
+  <!-- Part 2: JS Functions -->
+  <section>
+    <h2>Part 2: JavaScript Functions</h2>
+    <button id="calcBtn">Calculate Area</button>
+    <p id="result"></p>
+  </section>
+
+  <!-- Part 3: JS + CSS Combined -->
+  <section>
+    <h2>Part 3: Combining CSS & JS</h2>
+
+    <!-- 1. Animate box -->
+    <button id="animateBtn">Animate Box</button>
+    <div class="js-box"></div>
+
+    <!-- 2. Card flip -->
+    <button id="flipBtn">Flip Card</button>
+    <div class="card" tabindex="0">
+      <div class="card-inner">
+        <div class="card-front">Front</div>
+        <div class="card-back">Back</div>
+      </div>
+    </div>
+
+    <!-- 3. Loading animation -->
+    <button id="loadBtn">Start/Stop Loading</button>
+    <div class="loader"></div>
+
+    <!-- 4. Popup/Modal -->
+    <button id="popupBtn">Show Popup</button>
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <p>This is a popup modal!</p>
+        <button id="closeModal">Close</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Created by Philip Musee David -- PLP July Cohort 2025</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
